@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        bt(0, 0, n, new StringBuilder(), res);
+        return res;
+    }
+
+    void bt(int open, int close, int n, StringBuilder curr, List<String> res) {
+
+        if (curr.length() == 2 * n) {
+            res.add(curr.toString());
+            return;
+        }
+
+        if (open < n) {
+            curr.append('(');
+            bt(open + 1, close, n, curr, res);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+        if (close < open) {
+            curr.append(')');
+            bt(open, close + 1, n, curr, res);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+    }
+}
